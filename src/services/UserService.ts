@@ -49,7 +49,7 @@ export const UserService: interfaceUserService = {
             if (!existUser) {
                 return false;
             }
-            let payload = await jwt.verify(token, process.env.SECRET);
+            let payload = await jwt.verify(token, secret);
                 return payload? true : false
         } catch (error) {
             return false;
