@@ -3,7 +3,7 @@ import { interfaceUserService } from '../interfaces/userService';
 import { User } from '../models/User';
 import { Types } from 'mongoose';
 import * as jwt from 'jsonwebtoken';
-
+var secret :string = process.env.SECRET||"hjskghkdjlkhjflhkl;gfj;lghkl";
 export const UserService: interfaceUserService = {
     async firstStep(data) {
         try {
@@ -24,7 +24,7 @@ export const UserService: interfaceUserService = {
             if (existUser) {
                 if (existUser.password) {
                     if (existUser.password == password) {
-                        const token: string = await jwt.sign({ phone_number: existUser.phone_number }, process.env.SECRET, {
+                        const token: string = await jwt.sign({ phone_number: existUser.phone_number },secret, {
                             expiresIn: '60m'
                         });
                         return token;
@@ -32,7 +32,7 @@ export const UserService: interfaceUserService = {
                     throw "unauthorized request";
                 } else {
                     await User.findOneAndUpdate({ phone_number: phone_number }, { $set: { password: password } });
-                    const token: string = await jwt.sign({ phone_number: existUser.phone_number }, process.env.SECRET, {
+                    const token: string = await jwt.sign({ phone_number: existUser.phone_number }, secret, {
                         expiresIn: '60m'
                     });
                     return token;
