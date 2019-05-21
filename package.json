@@ -16,6 +16,8 @@
     "test": " mocha -r ts-node/register test/api.js --exit",
     "build-ts":"tsc",
     "postinstall": "npm run build-ts"
+  },"engines": {
+    "node":"10.11.0"
   },
   "author": "mahmoudabdelaziz.1993@outlook.com",
   "license": "ISC",
