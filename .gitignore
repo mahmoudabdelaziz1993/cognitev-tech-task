@@ -1,0 +1,7 @@
+# production files
+dist/
+# node modules
+node_modules/
+#environment variables
+.env
+src/public/uploads/*
